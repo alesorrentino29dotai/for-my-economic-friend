@@ -46,13 +46,11 @@ function ensureStorage() {
   fs.mkdirSync(UPLOADS_DIR, { recursive: true })
 
   if (!fs.existsSync(DOCUMENTS_FILE)) {
-    fs.writeFileSync(DOCUMENTS_FILE, '[]
-')
+    fs.writeFileSync(DOCUMENTS_FILE, '[]\n')
   }
 
   if (!fs.existsSync(SETTINGS_FILE)) {
-    fs.writeFileSync(SETTINGS_FILE, JSON.stringify(defaultSettings, null, 2) + '
-')
+    fs.writeFileSync(SETTINGS_FILE, JSON.stringify(defaultSettings, null, 2) + '\n')
   }
 }
 
@@ -65,8 +63,7 @@ function readJson(filePath, fallback) {
 }
 
 function writeJson(filePath, value) {
-  fs.writeFileSync(filePath, JSON.stringify(value, null, 2) + '
-')
+  fs.writeFileSync(filePath, JSON.stringify(value, null, 2) + '\n')
 }
 
 function getDocuments() {
@@ -98,7 +95,7 @@ function publicSettings(settings) {
 }
 
 function normalizeText(text) {
-  return text.replace(//g, '').replace(/\s+/g, ' ').trim()
+  return text.replace(/\r/g, '').replace(/\s+/g, ' ').trim()
 }
 
 function getExcerpt(text, maxLength = 220) {
@@ -178,11 +175,7 @@ Category: ${source.category || 'Uncategorized'}
 Content:
 ${trimmed}`
         })
-        .join('
-
----
-
-')
+        .join('\n\n---\n\n')
     : 'No relevant uploaded source matched the request.'
 
   return `${settings.systemPrompt}
@@ -204,8 +197,7 @@ function buildFallbackAnswer(question, sources, warning) {
 
   const sourceSummary = sources
     .map((source) => `- ${source.title}: ${getExcerpt(source.content, 240)}`)
-    .join('
-')
+    .join('\n')
 
   return {
     answer: `Here is a grounded synthesis based on the best matching uploaded material:
@@ -242,8 +234,7 @@ async function callGemini(settings, prompt) {
   }
 
   const data = await response.json()
-  const answer = data.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('
-').trim()
+  const answer = data.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('\n').trim()
 
   if (!answer) {
     throw new Error('Gemini did not return any text.')
@@ -278,8 +269,7 @@ async function callAnthropic(settings, prompt) {
   }
 
   const data = await response.json()
-  const answer = data.content?.map((item) => item.text || '').join('
-').trim()
+  const answer = data.content?.map((item) => item.text || '').join('\n').trim()
 
   if (!answer) {
     throw new Error('Anthropic did not return any text.')
