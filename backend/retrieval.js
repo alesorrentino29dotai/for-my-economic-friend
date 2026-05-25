@@ -20,6 +20,7 @@ const STOP_WORDS = new Set([
   "research",
   "should",
   "that",
+  "the",
   "their",
   "there",
   "these",
