@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+data/*.json
+storage/templates/*
+storage/documents/*
+!storage/templates/.gitkeep
+!storage/documents/.gitkeep
