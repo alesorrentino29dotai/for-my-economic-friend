@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Template Assistant</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Research Template Assistant</h1>
+      <p>
+        Upload documentary templates, connect an AI API (Gemini or
+        OpenAI-compatible), and get daily grounded help.
+      </p>
+    </header>
+
+    <main class="layout">
+      <section class="card">
+        <h2>1) AI Provider Configuration</h2>
+        <form id="settings-form" class="stack">
+          <label>
+            Provider
+            <select id="provider" required>
+              <option value="gemini">Google Gemini</option>
+              <option value="openai-compatible">
+                OpenAI-compatible / Cloud Code
+              </option>
+            </select>
+          </label>
+
+          <label>
+            Model
+            <input
+              id="model"
+              type="text"
+              placeholder="gemini-1.5-flash or custom model"
+              required
+            />
+          </label>
+
+          <label id="base-url-wrapper" class="hidden">
+            Base URL (OpenAI-compatible only)
+            <input
+              id="base-url"
+              type="url"
+              placeholder="https://api.openai.com/v1"
+            />
+          </label>
+
+          <label>
+            API Key
+            <input id="api-key" type="password" autocomplete="off" required />
+          </label>
+
+          <button type="submit">Save local settings</button>
+          <p class="hint">
+            Settings are saved only in your browser (localStorage), not in the
+            backend.
+          </p>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>2) Upload Documentary Templates</h2>
+        <form id="upload-form" class="stack">
+          <label>
+            File
+            <input id="file" name="file" type="file" required />
+          </label>
+          <label>
+            Title
+            <input id="title" name="title" type="text" />
+          </label>
+          <label>
+            Description
+            <textarea id="description" name="description" rows="2"></textarea>
+          </label>
+          <label>
+            Tags (comma separated)
+            <input id="tags" name="tags" type="text" placeholder="macro, gdp" />
+          </label>
+          <button type="submit">Upload template</button>
+        </form>
+      </section>
+
+      <section class="card wide">
+        <h2>3) Managed Templates</h2>
+        <p class="hint">
+          Select templates to use as references for the assistant response.
+        </p>
+        <ul id="templates-list" class="templates"></ul>
+      </section>
+
+      <section class="card wide">
+        <h2>4) Daily Research Help</h2>
+        <div id="chat-log" class="chat-log"></div>
+        <form id="chat-form" class="stack">
+          <label>
+            Your request
+            <textarea
+              id="question"
+              rows="4"
+              placeholder="Summarize today’s macro signals using the selected templates."
+              required
+            ></textarea>
+          </label>
+          <button type="submit">Ask assistant</button>
+        </form>
+      </section>
+    </main>
+
+    <template id="template-item">
+      <li class="template-item">
+        <label class="template-select">
+          <input type="checkbox" class="template-checkbox" />
+          <span class="template-title"></span>
+        </label>
+        <p class="template-meta"></p>
+        <p class="template-desc"></p>
+        <button type="button" class="delete">Delete</button>
+      </li>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
