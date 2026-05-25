@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Assistant Portal</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Research Assistant Portal</h1>
+        <p>
+          Upload your templates, connect Gemini or Cloud Code, and request daily guidance grounded
+          in your own documentary base.
+        </p>
+      </header>
+
+      <section class="grid">
+        <article class="card">
+          <h2>1) Upload templates</h2>
+          <form id="upload-form">
+            <label>
+              Title
+              <input type="text" name="title" placeholder="e.g. Macro Outlook Notes" />
+            </label>
+            <label>
+              Description
+              <textarea
+                name="description"
+                rows="3"
+                placeholder="What is this template useful for?"
+              ></textarea>
+            </label>
+            <label>
+              Tags (comma separated)
+              <input type="text" name="tags" placeholder="economics, daily, strategy" />
+            </label>
+            <label>
+              Template file
+              <input type="file" name="template" required />
+            </label>
+            <button type="submit">Upload</button>
+          </form>
+          <p id="upload-status" class="status"></p>
+        </article>
+
+        <article class="card">
+          <h2>2) Configure AI provider</h2>
+          <form id="settings-form">
+            <label>
+              Provider
+              <select name="provider">
+                <option value="gemini">Gemini</option>
+                <option value="cloud-code">Cloud Code / OpenAI-compatible</option>
+              </select>
+            </label>
+            <fieldset>
+              <legend>Gemini</legend>
+              <label>
+                API key
+                <input type="password" name="geminiApiKey" placeholder="Only needed once" />
+              </label>
+              <label>
+                Model
+                <input type="text" name="geminiModel" placeholder="gemini-2.5-flash" />
+              </label>
+            </fieldset>
+            <fieldset>
+              <legend>Cloud Code / OpenAI-compatible</legend>
+              <label>
+                API key
+                <input type="password" name="cloudCodeApiKey" placeholder="Only needed once" />
+              </label>
+              <label>
+                Model
+                <input type="text" name="cloudCodeModel" placeholder="gpt-4.1-mini" />
+              </label>
+              <label>
+                Chat completions URL
+                <input
+                  type="url"
+                  name="cloudCodeBaseUrl"
+                  placeholder="https://api.openai.com/v1/chat/completions"
+                />
+              </label>
+            </fieldset>
+            <button type="submit">Save settings</button>
+          </form>
+          <p id="settings-status" class="status"></p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>3) Ask for daily help</h2>
+        <form id="help-form">
+          <label>
+            Daily request
+            <textarea
+              name="question"
+              rows="3"
+              required
+              placeholder="What should I focus on today based on my uploaded research templates?"
+            ></textarea>
+          </label>
+          <button type="submit">Generate daily help</button>
+        </form>
+        <p id="help-meta" class="status"></p>
+        <pre id="help-answer" class="answer"></pre>
+      </section>
+
+      <section class="card">
+        <h2>Uploaded documents</h2>
+        <ul id="documents-list"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

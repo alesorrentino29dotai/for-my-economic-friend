@@ -1,0 +1,33 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "Research assistant portal with template uploads and LLM daily help.",
+  "type": "module",
+  "main": "src/server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test",
+    "check": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alesorrentino29dotai/for-my-economic-friend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alesorrentino29dotai/for-my-economic-friend/issues"
+  },
+  "homepage": "https://github.com/alesorrentino29dotai/for-my-economic-friend#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.1.1"
+  }
+}
