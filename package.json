@@ -1,0 +1,27 @@
+{
+  "name": "for-my-economic-friend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Research assistant demo with template uploads and grounded AI help.",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace backend\" \"npm run dev --workspace frontend\"",
+    "build": "npm run build --workspace frontend",
+    "lint": "npm run lint --workspace frontend",
+    "start": "npm run start --workspace backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alesorrentino29dotai/for-my-economic-friend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alesorrentino29dotai/for-my-economic-friend/issues"
+  },
+  "homepage": "https://github.com/alesorrentino29dotai/for-my-economic-friend#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
