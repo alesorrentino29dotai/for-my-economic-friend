@@ -1,0 +1,15 @@
+{
+  "name": "research-template-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A small frontend/backend demo for uploading research templates and asking AI-assisted questions over them.",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

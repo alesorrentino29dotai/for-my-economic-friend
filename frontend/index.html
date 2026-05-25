@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Research Template Assistant</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav">
+        <span class="brand">Research Template Assistant</span>
+        <span class="pill">Frontend + Backend Demo</span>
+      </nav>
+      <section class="hero-grid">
+        <div>
+          <p class="eyebrow">For researchers building a documentary base</p>
+          <h1>Upload templates, connect an AI API, and get focused daily help.</h1>
+          <p class="hero-copy">
+            Store protocols, document templates, literature notes, or grant structures. Ask questions over
+            the uploaded base using local demo mode or your own Gemini/Claude API key.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#assistant">Ask the assistant</a>
+            <a class="button secondary" href="#upload">Upload a template</a>
+          </div>
+        </div>
+        <aside class="hero-card">
+          <span class="card-label">Daily workflow</span>
+          <ol>
+            <li>Upload a template or source note.</li>
+            <li>Ask what to write, check, or improve today.</li>
+            <li>Use cited snippets to keep answers grounded.</li>
+          </ol>
+        </aside>
+      </section>
+    </header>
+
+    <main class="layout">
+      <section class="panel" id="upload">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Knowledge base</p>
+            <h2>Upload templates and documents</h2>
+          </div>
+          <span id="document-count" class="counter">0 documents</span>
+        </div>
+
+        <form id="upload-form" class="stack">
+          <label>
+            Title
+            <input id="title" name="title" placeholder="e.g. Interview protocol template" required />
+          </label>
+
+          <label>
+            Type
+            <select id="kind" name="kind">
+              <option value="template">Template</option>
+              <option value="protocol">Protocol</option>
+              <option value="literature-note">Literature note</option>
+              <option value="grant">Grant or project text</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            Upload text file (optional)
+            <input id="file" name="file" type="file" accept=".txt,.md,.csv,.json,.html,.xml" />
+          </label>
+
+          <label>
+            Or paste content
+            <textarea id="content" name="content" rows="9" placeholder="Paste the template or source material here..."></textarea>
+          </label>
+
+          <button class="button primary" type="submit">Save to knowledge base</button>
+          <p id="upload-status" class="status" role="status"></p>
+        </form>
+      </section>
+
+      <section class="panel" id="assistant">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Assistant</p>
+            <h2>Ask over the uploaded base</h2>
+          </div>
+        </div>
+
+        <form id="chat-form" class="stack">
+          <div class="provider-grid">
+            <label>
+              Provider
+              <select id="provider" name="provider">
+                <option value="local">Local demo mode (no API key)</option>
+                <option value="gemini">Google Gemini API</option>
+                <option value="claude">Anthropic Claude API</option>
+              </select>
+            </label>
+
+            <label>
+              Model
+              <input id="model" name="model" placeholder="Optional model override" />
+            </label>
+          </div>
+
+          <label>
+            API key for this request
+            <input id="api-key" name="api-key" type="password" placeholder="Only required for Gemini or Claude" autocomplete="off" />
+          </label>
+
+          <label>
+            Question
+            <textarea id="question" name="question" rows="5" required>What should I focus on today based on my uploaded research templates?</textarea>
+          </label>
+
+          <div class="quick-prompts" aria-label="Example prompts">
+            <button type="button" data-prompt="Turn my strongest uploaded template into a daily writing checklist.">
+              Daily checklist
+            </button>
+            <button type="button" data-prompt="Which uploaded source is most useful for preparing a grant or project proposal?">
+              Proposal help
+            </button>
+            <button type="button" data-prompt="What is missing from my documentary base for the next research step?">
+              Gap finder
+            </button>
+          </div>
+
+          <button class="button primary" type="submit">Ask assistant</button>
+          <p id="chat-status" class="status" role="status"></p>
+        </form>
+
+        <article id="answer" class="answer hidden" aria-live="polite"></article>
+      </section>
+
+      <section class="panel library-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Library</p>
+            <h2>Uploaded base</h2>
+          </div>
+          <button id="refresh" class="button secondary" type="button">Refresh</button>
+        </div>
+        <div id="documents" class="documents empty">No documents uploaded yet.</div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        API keys are sent only with the request and are not saved by this demo. For production, use a server-side
+        secrets manager, authentication, and a real database.
+      </p>
+    </footer>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
