@@ -168,7 +168,7 @@ const __dirname = path.dirname(__filename);
 const publicDir = path.resolve(__dirname, "../public");
 
 app.use(express.static(publicDir));
-app.get("*", (_request, response) => {
+app.get("/{*splat}", (_request, response) => {
   response.sendFile(path.join(publicDir, "index.html"));
 });
 
